@@ -1,5 +1,4 @@
-require 'rspec'
-require "#{File.dirname(__FILE__)}/../src/royalty_percentage"
+require 'spec_helper'
 
 RSpec.describe RoyaltyPercentage do
   it 'has a value' do

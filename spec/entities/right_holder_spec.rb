@@ -1,5 +1,4 @@
-require 'rspec'
-require "#{File.dirname(__FILE__)}/../src/right_holder"
+require 'spec_helper'
 
 RSpec.describe RightHolder do
   it 'has a name' do

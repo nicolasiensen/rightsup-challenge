@@ -1,6 +1,4 @@
-require 'rspec'
-require "#{File.dirname(__FILE__)}/../src/license_agreement"
-require "#{File.dirname(__FILE__)}/../src/royalty_percentage"
+require 'spec_helper'
 
 RSpec.describe LicenseAgreement do
   it 'has two right holders and one royalty percentage' do
