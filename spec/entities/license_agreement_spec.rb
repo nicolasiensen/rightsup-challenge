@@ -1,28 +1,40 @@
 require 'spec_helper'
 
 RSpec.describe LicenseAgreement do
-  it 'has two right holders and one royalty percentage' do
-    rightsup = RightHolder.new('rightsup')
-    rh1 = RightHolder.new('rh1')
-    royalty_percentage = RoyaltyPercentage.new(20.0)
-    license_agreement = LicenseAgreement.new(rh1, rightsup, royalty_percentage)
-
-    expect(license_agreement.rh1).to be_eql(rh1)
-    expect(license_agreement.rh2).to be_eql(rightsup)
-    expect(license_agreement.royalty_percentage).to be_eql(royalty_percentage)
+  before do
+    @rh1 = RightHolder.new('rh1')
+    @rightsup = RightHolder.new('rightsup')
+    @royalty_percentage = RoyaltyPercentage.new(20.0)
   end
 
-  it 'could have a business introducer' do
-    rightsup = RightHolder.new('rightsup')
-    rh2 = RightHolder.new('rh2')
-    royalty_percentage = RoyaltyPercentage.new(20.0)
+  subject do
+    LicenseAgreement.new(
+      rh1: @rh1,
+      rh2: @rightsup,
+      royalty_percentage: @royalty_percentage
+    )
+  end
+
+  it 'has a first right holder' do
+    expect(subject.rh1).to be_eql(@rh1)
+  end
+
+  it 'has a second right holder' do
+    expect(subject.rh2).to be_eql(@rightsup)
+  end
+
+  it 'has a royalty percentage' do
+    expect(subject.royalty_percentage).to be_eql(@royalty_percentage)
+  end
+
+  it 'could have a business introducer percentage' do
     bi_percentage = RoyaltyPercentage.new(50.0)
 
     license_agreement = LicenseAgreement.new(
-      rh2,
-      rightsup,
-      royalty_percentage,
-      bi_percentage
+      rh1: @rh1,
+      rh2: @rightsup,
+      royalty_percentage: @royalty_percentage,
+      bi_percentage: bi_percentage
     )
 
     expect(license_agreement.bi_percentage).to be_eql(bi_percentage)
