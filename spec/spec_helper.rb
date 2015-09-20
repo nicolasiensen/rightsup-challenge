@@ -1,3 +1,2 @@
 require 'rspec'
-
-Dir["#{File.dirname(__FILE__)}/../src/**/*.rb"].each {|file| require file }
+require "#{File.dirname(__FILE__)}/../src/rights_up_challenge.rb"
