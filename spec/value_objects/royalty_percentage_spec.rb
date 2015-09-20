@@ -18,4 +18,10 @@ RSpec.describe RoyaltyPercentage do
       expect(subject.eql?(param)).to be_falsey
     end
   end
+
+  describe '#*' do
+    it 'is the multiplication of its percentage by the parameter' do
+      expect(subject.*(100)).to be_eql(20.0)
+    end
+  end
 end

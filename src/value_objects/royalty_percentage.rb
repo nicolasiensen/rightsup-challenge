@@ -8,4 +8,8 @@ class RoyaltyPercentage
   def eql? royalty_percentage
     royalty_percentage.value == self.value
   end
+
+  def * float_number
+    float_number * (self.value/100)
+  end
 end
