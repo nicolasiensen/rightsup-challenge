@@ -22,8 +22,6 @@ Start the irb console inside the project's folder and then run the following:
 require "#{Dir.pwd}/src/rights_up_challenge"
 ```
 
-Now you can use all entities, value objects and services of the product
-
 ### Value Objects
 #### RoyaltyPercentage
 It represents a percentage number, used to process revenues shares.
