@@ -91,9 +91,9 @@ Payment.new(
 This module have a single method called ```distribute_revenue```, this method receives a ```Payment``` object and an array of ```RecordingShare```'s.
 
 ```ruby
-PaymentProcessor.distribute_revenue(
-  payment: @payment,
-  recording_shares: [@recording_share]
+distribution = PaymentProcessor.distribute_revenue(
+  payment: payment,
+  recording_shares: [recording_share_1, recording_share_2]
 )
 ```
 
