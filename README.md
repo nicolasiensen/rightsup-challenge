@@ -63,7 +63,7 @@ LicenseAgreement.new(
 ```
 
 #### RecordingShare
-This class is responsible keep a ```claimed_percentage``` attached to a ```LicenseAgreement``` on the revenues of a recording.
+This class is responsible keep a ```claimed_percentage``` attached to a ```LicenseAgreement```.
 
 ```ruby
 RecordingShare.new(
@@ -108,6 +108,56 @@ As a result, ```PaymentProcessor.distribute_revenue``` will return a hash repres
 }
 ```
 
+## Full example
+```ruby
+require "#{Dir.pwd}/src/rights_up_challenge"
+rightsup = RightHolder.new('rightsup')
+rh1 = RightHolder.new('rh1')
+rh2 = RightHolder.new('rh2')
+
+license_agreement_1 = LicenseAgreement.new(
+  rh1: rh1,
+  rh2: rightsup,
+  royalty_percentage: RoyaltyPercentage.new(20.0)
+)
+
+license_agreement_2 = LicenseAgreement.new(
+  rh1: rh2,
+  rh2: rightsup,
+  royalty_percentage: RoyaltyPercentage.new(20.0),
+  bi_percentage: RoyaltyPercentage.new(50.0)
+)
+
+recording_share_1 = RecordingShare.new(
+  claimed_percentage: RoyaltyPercentage.new(50.0),
+  license_agreement: license_agreement_1
+)
+
+recording_share_2 = RecordingShare.new(
+  claimed_percentage: RoyaltyPercentage.new(50.0),
+  license_agreement: license_agreement_2
+)
+
+payment = Payment.new(
+  title: 'Yesterday',
+  artist: 'The Beatles',
+  claimed_percentage: RoyaltyPercentage.new(100.0),
+  recording_revenues: 100.0
+)
+
+distribution = PaymentProcessor.distribute_revenue(
+  payment: payment,
+  recording_shares: [recording_share_1, recording_share_2]
+)
+
+# distribution = {
+#   rh1: 40.0,
+#   rh2: 40.0,
+#   rightsup: 15.0,
+#   bi: 5.0
+# }
+```
+
 ## Observations
 ### RoyaltyCurrency
 In the current version the solution is using plain floating numbers to represent currency, but in the future we could implement a class called ```RoyaltyCurrency``` to represent all the currencies in the project.
@@ -117,6 +167,12 @@ In the [problem definition](https://docs.google.com/document/d/1MKeYuvyc5Vv7fV6X
 
 ### ```Payment``` entity
 It was really painful to decide which name this entity should assume, ```Income```, ```RecordingRevenue``` or just ```Revenue```. In the end ```Payment``` seemed to better represent the meaning of this entity purpose, but we can still argue on that.
+
+### Business introducer as an entity
+For now, business introducer is represented by a ```RoyaltyPercentage```, but if needed, we could implement a ```BusinessIntroducer``` entity to keep more information other than it's percentage.
+
+### Aggregates
+There was no need to create an aggregate in order to fully accomplish the challenge, but there are some lists that could be managed by some aggregates. Like a list of payments received by collecting agencies or a list of recording shares claimed by right holders.
 
 ## Tests
 When inside of the project's folder:
