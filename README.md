@@ -7,6 +7,13 @@ cd rightsup-challenge
 bundle install
 ```
 
+## Tests
+When inside of the project's folder:
+
+```
+rspec spec
+```
+
 ## Usage
 You can use Interactive Ruby (irb) to play with Right's Up Challenge solution.
 
@@ -173,10 +180,3 @@ For now, business introducer is represented by a ```RoyaltyPercentage```, but if
 
 ### Aggregates
 There was no need to create an aggregate in order to fully accomplish the challenge, but there are some lists that could be managed by some aggregates. Like a list of payments received by collecting agencies or a list of recording shares claimed by right holders.
-
-## Tests
-When inside of the project's folder:
-
-```
-rspec spec
-```
