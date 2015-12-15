@@ -2,7 +2,10 @@ class RoyaltyPercentage
   attr_accessor :value
 
   def initialize value
-    @value = value
+    float_value = value.to_f
+    raise "Value can't be less than 0" if float_value < 0
+    raise "Value can't be greater than 100" if float_value > 100
+    @value = float_value
   end
 
   def eql? royalty_percentage
