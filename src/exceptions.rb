@@ -1,0 +1,1 @@
+class MaximumClaimedPercentageError < StandardError; end
