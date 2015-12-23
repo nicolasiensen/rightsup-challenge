@@ -44,4 +44,10 @@ RSpec.describe RoyaltyPercentage do
       expect(subject.*(100)).to be_eql(20.0)
     end
   end
+
+  describe '#+' do
+    it 'should return a new RoyaltyPercentage object with the sum of its values' do
+      expect(subject + RoyaltyPercentage.new(10)).to be_eql(RoyaltyPercentage.new(30.0))
+    end
+  end
 end

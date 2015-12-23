@@ -15,4 +15,9 @@ class RoyaltyPercentage
   def * float_number
     float_number * (self.value/100)
   end
+
+  def + royalty_percentage
+    new_value = royalty_percentage.value + self.value
+    RoyaltyPercentage.new(new_value)
+  end
 end
