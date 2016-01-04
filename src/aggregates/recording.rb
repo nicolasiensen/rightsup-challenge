@@ -1,20 +1,20 @@
 class Recording
-  attr_accessor :shares
+  attr_accessor :claims
 
   def initialize
-    self.shares = []
+    self.claims = []
   end
 
-  def add_share share
+  def add_claim claim
     begin
-      self.total_share_percentage + share.claimed_percentage
-      self.shares << share
+      self.total_claim_percentage + claim.claimed_percentage
+      self.claims << claim
     end
   end
 
-  def total_share_percentage
-    if self.shares.any?
-      self.shares.map{|s| s.claimed_percentage}.inject{|sum, c| sum + c}
+  def total_claim_percentage
+    if self.claims.any?
+      self.claims.map{|s| s.claimed_percentage}.inject{|sum, c| sum + c}
     else
       RoyaltyPercentage.new(0)
     end

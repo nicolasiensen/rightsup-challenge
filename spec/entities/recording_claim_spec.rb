@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe RecordingShare do
+RSpec.describe RecordingClaim do
   before do
     @license_agreement = LicenseAgreement.new(
       rh1: double('RightHolder'),
@@ -10,7 +10,7 @@ RSpec.describe RecordingShare do
   end
 
   subject do
-    RecordingShare.new(
+    RecordingClaim.new(
       claimed_percentage: RoyaltyPercentage.new(50.0),
       license_agreement: @license_agreement
     )

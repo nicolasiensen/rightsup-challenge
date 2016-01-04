@@ -1,37 +1,37 @@
 require 'spec_helper'
 
 RSpec.describe Recording do
-  describe "#add_recording_shares" do
+  describe "#add_claim" do
     before do
       @recording = Recording.new
       @license_agreement = double("license_agreement")
     end
 
-    it "should add a new recording share" do
-      recording_share = RecordingShare.new(
+    it "should add a new recording claim" do
+      recording_claim = RecordingClaim.new(
         claimed_percentage: RoyaltyPercentage.new(100),
         license_agreement: @license_agreement
       )
 
-      @recording.add_share(recording_share)
-      expect(@recording.shares).to be_eql([recording_share])
+      @recording.add_claim(recording_claim)
+      expect(@recording.claims).to be_eql([recording_claim])
     end
 
-    it "should not add a new recording share if it sums more than 100%" do
-      recording_share_1 = RecordingShare.new(
+    it "should not add a new recording claim if it sums more than 100%" do
+      recording_claim_1 = RecordingClaim.new(
         claimed_percentage: RoyaltyPercentage.new(100),
         license_agreement: @license_agreement
       )
 
-      recording_share_2 = RecordingShare.new(
+      recording_claim_2 = RecordingClaim.new(
         claimed_percentage: RoyaltyPercentage.new(10),
         license_agreement: @license_agreement
       )
 
-      @recording.add_share(recording_share_1)
+      @recording.add_claim(recording_claim_1)
 
       expect do
-        @recording.add_share(recording_share_2)
+        @recording.add_claim(recording_claim_2)
       end.to raise_error "Value can't be greater than 100"
     end
   end

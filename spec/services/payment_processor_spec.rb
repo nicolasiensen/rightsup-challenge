@@ -29,7 +29,7 @@ RSpec.describe PaymentProcessor do
 
     context 'there is only one right holder' do
       before do
-        @recording_share = RecordingShare.new(
+        @recording_claim = RecordingClaim.new(
           claimed_percentage: RoyaltyPercentage.new(100.0),
           license_agreement: @license_agreement_1
         )
@@ -38,7 +38,7 @@ RSpec.describe PaymentProcessor do
       subject do
         PaymentProcessor.distribute_revenue(
           payment: @payment,
-          recording_shares: [@recording_share]
+          recording_claims: [@recording_claim]
         )
       end
 
@@ -53,12 +53,12 @@ RSpec.describe PaymentProcessor do
 
     context 'there are more than one right holder' do
       before do
-        @recording_share_1 = RecordingShare.new(
+        @recording_claim_1 = RecordingClaim.new(
           claimed_percentage: RoyaltyPercentage.new(50.0),
           license_agreement: @license_agreement_1
         )
 
-        @recording_share_2 = RecordingShare.new(
+        @recording_claim_2 = RecordingClaim.new(
           claimed_percentage: RoyaltyPercentage.new(50.0),
           license_agreement: @license_agreement_2
         )
@@ -67,7 +67,7 @@ RSpec.describe PaymentProcessor do
       subject do
         PaymentProcessor.distribute_revenue(
           payment: @payment,
-          recording_shares: [@recording_share_1, @recording_share_2]
+          recording_claims: [@recording_claim_1, @recording_claim_2]
         )
       end
 
