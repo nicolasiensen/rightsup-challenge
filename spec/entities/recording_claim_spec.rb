@@ -2,17 +2,13 @@ require 'spec_helper'
 
 RSpec.describe RecordingClaim do
   before do
-    @license_agreement = LicenseAgreement.new(
-      rh1: double('RightHolder'),
-      rh2: double('RightHolder'),
-      royalty_percentage: RoyaltyPercentage.new(20.0)
-    )
+    @rh = double('RightHolder')
   end
 
   subject do
     RecordingClaim.new(
       claimed_percentage: RoyaltyPercentage.new(50.0),
-      license_agreement: @license_agreement
+      right_holder: @rh
     )
   end
 
@@ -20,7 +16,7 @@ RSpec.describe RecordingClaim do
     expect(subject.claimed_percentage).to be_eql(RoyaltyPercentage.new(50.0))
   end
 
-  it 'has a license agreement' do
-    expect(subject.license_agreement).to be_eql(@license_agreement)
+  it 'has a right holder' do
+    expect(subject.right_holder).to be_eql(@rh)
   end
 end

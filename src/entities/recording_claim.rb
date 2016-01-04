@@ -2,10 +2,10 @@
 # along with the respective license agreement with Right's Up
 
 class RecordingClaim
-  attr_accessor :claimed_percentage, :license_agreement
+  attr_accessor :claimed_percentage, :right_holder
 
-  def initialize claimed_percentage:, license_agreement:
-    @claimed_percentage, @license_agreement =
-      claimed_percentage, license_agreement
+  def initialize claimed_percentage:, right_holder:
+    @claimed_percentage, @right_holder =
+      claimed_percentage, right_holder
   end
 end
