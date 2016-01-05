@@ -24,7 +24,7 @@ require "#{Dir.pwd}/src/rights_up_challenge"
 
 ### Value Objects
 #### RoyaltyPercentage
-It represents a percentage number, used to process revenues shares.
+It represents a percentage number, used to process revenues distribution.
 
 ```ruby
 rp = RoyaltyPercentage.new(20.0) # 20%
@@ -67,17 +67,17 @@ LicenseAgreement.new(
 )
 ```
 
-#### RecordingShare
+#### RecordingClaim
 This class is responsible keep a ```claimed_percentage``` attached to a ```LicenseAgreement```.
 
 ```ruby
-RecordingShare.new(
+RecordingClaim.new(
   claimed_percentage: RoyaltyPercentage.new(50.0),
   license_agreement: @license_agreement
 )
 ```
 
-The ```RecordingShare``` created above tells us that the ```@license_agreement``` should be applied for 50% of the total revenue of a recording.
+The ```RecordingClaim``` created above tells us that the ```@license_agreement``` should be applied for 50% of the total revenue of a recording.
 
 #### Payment
 This class represents the received money from a collecting agency
@@ -93,12 +93,12 @@ Payment.new(
 
 ### Services
 #### PaymentProcessor
-This module have a single method called ```distribute_revenue```, this method receives a ```Payment``` object and an array of ```RecordingShare```'s.
+This module have a single method called ```distribute_revenue```, this method receives a ```Payment``` object and an array of ```RecordingClaim```'s.
 
 ```ruby
 distribution = PaymentProcessor.distribute_revenue(
   payment: payment,
-  recording_shares: [recording_share_1, recording_share_2]
+  recording_claims: [recording_claim_1, recording_claim_2]
 )
 ```
 
@@ -133,12 +133,12 @@ license_agreement_2 = LicenseAgreement.new(
   bi_percentage: RoyaltyPercentage.new(50.0)
 )
 
-recording_share_1 = RecordingShare.new(
+recording_claim_1 = RecordingClaim.new(
   claimed_percentage: RoyaltyPercentage.new(50.0),
   license_agreement: license_agreement_1
 )
 
-recording_share_2 = RecordingShare.new(
+recording_claim_2 = RecordingClaim.new(
   claimed_percentage: RoyaltyPercentage.new(50.0),
   license_agreement: license_agreement_2
 )
@@ -152,7 +152,7 @@ payment = Payment.new(
 
 distribution = PaymentProcessor.distribute_revenue(
   payment: payment,
-  recording_shares: [recording_share_1, recording_share_2]
+  recording_claims: [recording_claim_1, recording_claim_2]
 )
 
 # distribution = {
@@ -177,4 +177,4 @@ It was really painful to decide which name this entity should assume, ```Income`
 For now, business introducer is represented by a ```RoyaltyPercentage```, but if needed, we could implement a ```BusinessIntroducer``` entity to keep more information other than it's percentage.
 
 ### Aggregates
-There was no need to create an aggregate in order to fully accomplish the challenge, but there are some lists that could be managed by some aggregates. Like a list of payments received by collecting agencies or a list of recording shares claimed by right holders.
+There was no need to create an aggregate in order to fully accomplish the challenge, but there are some lists that could be managed by some aggregates. Like a list of payments received by collecting agencies or a list of recording claims by right holders.
