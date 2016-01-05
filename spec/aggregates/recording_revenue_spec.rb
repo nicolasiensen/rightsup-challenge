@@ -32,7 +32,7 @@ RSpec.describe RecordingRevenue do
         instance_double(
           "RecordingClaim",
           claimed_percentage: RoyaltyPercentage.new(100.0),
-          generate_recording_shares: [double("recording_share")]
+          share_revenue: [double("recording_share")]
         )
       ]
     )
@@ -48,12 +48,12 @@ RSpec.describe RecordingRevenue do
         instance_double(
           "RecordingClaim",
           claimed_percentage: RoyaltyPercentage.new(50.0),
-          generate_recording_shares: [double("recording_share")]
+          share_revenue: [double("recording_share")]
         ),
         instance_double(
           "RecordingClaim",
           claimed_percentage: RoyaltyPercentage.new(50.0),
-          generate_recording_shares: [double("recording_share")]
+          share_revenue: [double("recording_share")]
         )
       ]
     )

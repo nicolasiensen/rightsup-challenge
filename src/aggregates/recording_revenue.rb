@@ -12,7 +12,7 @@ class RecordingRevenue
     @recording_shares = []
 
     recording_claims.each do |rc|
-      @recording_shares.concat rc.generate_recording_shares(total)
+      @recording_shares.concat rc.share_revenue(total)
     end
   end
 end
