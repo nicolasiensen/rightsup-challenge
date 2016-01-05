@@ -7,18 +7,6 @@ RSpec.describe RoyaltyPercentage do
     expect(subject.value).to be_eql(20.0)
   end
 
-  it 'should be greater than 0' do
-    expect do
-      RoyaltyPercentage.new(-1.0)
-    end.to raise_error "Value can't be less than 0"
-  end
-
-  it 'should be less than 100' do
-    expect do
-      RoyaltyPercentage.new(101.0)
-    end.to raise_error "Value can't be greater than 100"
-  end
-
   it 'should parse value to float' do
     rp = RoyaltyPercentage.new(50)
     expect(rp.value).to be_eql 50.0
