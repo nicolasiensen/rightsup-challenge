@@ -79,46 +79,12 @@ RecordingClaim.new(
 
 The ```RecordingClaim``` created above tells us that the ```@license_agreement``` should be applied for 50% of the total revenue of a recording.
 
-#### Payment
-This class represents the received money from a collecting agency
-
-```ruby
-Payment.new(
-  title: 'Yesterday',
-  artist: 'The Beatles',
-  claimed_percentage: RoyaltyPercentage.new(100.0),
-  recording_revenues: 100.0
-)
-```
-
-### Services
-#### PaymentProcessor
-This module have a single method called ```distribute_revenue```, this method receives a ```Payment``` object and an array of ```RecordingClaim```'s.
-
-```ruby
-distribution = PaymentProcessor.distribute_revenue(
-  payment: payment,
-  recording_claims: [recording_claim_1, recording_claim_2]
-)
-```
-
-As a result, ```PaymentProcessor.distribute_revenue``` will return a hash representing the distribution:
-
-```ruby
-{
-  rh1: 40.0,
-  rh2: 40.0,
-  rightsup: 15.0,
-  bi: 5.0
-}
-```
-
 ## Full example
 ```ruby
 require "#{Dir.pwd}/src/rights_up_challenge"
-rightsup = RightHolder.new('rightsup')
-rh1 = RightHolder.new('rh1')
-rh2 = RightHolder.new('rh2')
+rh1 = RightHolder.new("rh1")
+rh2 = RightHolder.new("rh2")
+rightsup = RightHolder.new("RightsUp")
 
 license_agreement_1 = LicenseAgreement.new(
   rh1: rh1,
@@ -135,32 +101,24 @@ license_agreement_2 = LicenseAgreement.new(
 
 recording_claim_1 = RecordingClaim.new(
   claimed_percentage: RoyaltyPercentage.new(50.0),
+  right_holder: rh1,
   license_agreement: license_agreement_1
 )
 
 recording_claim_2 = RecordingClaim.new(
   claimed_percentage: RoyaltyPercentage.new(50.0),
+  right_holder: rh2,
   license_agreement: license_agreement_2
 )
 
-payment = Payment.new(
-  title: 'Yesterday',
-  artist: 'The Beatles',
+recording_revenue = RecordingRevenue.new(
   claimed_percentage: RoyaltyPercentage.new(100.0),
-  recording_revenues: 100.0
-)
-
-distribution = PaymentProcessor.distribute_revenue(
-  payment: payment,
+  total: 100.0,
   recording_claims: [recording_claim_1, recording_claim_2]
 )
 
-# distribution = {
-#   rh1: 40.0,
-#   rh2: 40.0,
-#   rightsup: 15.0,
-#   bi: 5.0
-# }
+# Returns all recording shares for the given recording revenue
+recording_revenue.recording_shares
 ```
 
 ## Observations
