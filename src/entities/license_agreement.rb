@@ -1,23 +1,23 @@
 class LicenseAgreement
-  attr_accessor :rh1, :rh2, :royalty_percentage, :bi_percentage
+  attr_accessor :artist, :commissioned, :royalty_percentage, :bi_percentage
 
-  def initialize rh1:, rh2:, royalty_percentage:, bi_percentage: nil
-    @rh1, @rh2, @royalty_percentage, @bi_percentage =
-      rh1, rh2, royalty_percentage, bi_percentage
+  def initialize artist:, commissioned:, royalty_percentage:, bi_percentage: nil
+    @artist, @commissioned, @royalty_percentage, @bi_percentage =
+      artist, commissioned, royalty_percentage, bi_percentage
   end
 
-  # def generate_recording_shares total
-  #   share = total * @royalty_percentage
-  #
-  #   if bi_percentage.present?
-  #     [
-  #       RecordingShare.new(right_holder: rh1, total: share * (1 - @bi_percentage)),
-  #       RecordingShare.new(right_holder: "bi", total: share * @bi_percentage)
-  #     ]
-  #   else
-  #     [
-  #       RecordingShare.new(right_holder: rh1, total: share)
-  #     ]
-  #   end
-  # end
+  def share_revenue total
+    share = total * @royalty_percentage
+
+    if bi_percentage.nil?
+      [
+        RecordingShare.new(right_holder: commissioned, total: share)
+      ]
+    else
+      [
+        RecordingShare.new(right_holder: commissioned, total: share * (1 - @bi_percentage.to_f)),
+        RecordingShare.new(right_holder: "bi", total: share * @bi_percentage)
+      ]
+    end
+  end
 end
