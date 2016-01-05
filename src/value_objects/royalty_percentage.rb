@@ -1,4 +1,4 @@
-class RoyaltyPercentage
+class RoyaltyPercentage < Numeric
   attr_accessor :value
 
   def initialize value
@@ -20,5 +20,9 @@ class RoyaltyPercentage
 
   def > number
     @value > number
+  end
+
+  def to_f
+    @value/100
   end
 end
