@@ -6,14 +6,14 @@ task :example do
   rightsup = RightHolder.new("RightsUp")
 
   license_agreement_1 = LicenseAgreement.new(
-    rh1: rh1,
-    rh2: rightsup,
+    artist: rh1,
+    commissioned: rightsup,
     royalty_percentage: RoyaltyPercentage.new(20.0)
   )
 
   license_agreement_2 = LicenseAgreement.new(
-    rh1: rh2,
-    rh2: rightsup,
+    artist: rh2,
+    commissioned: rightsup,
     royalty_percentage: RoyaltyPercentage.new(20.0),
     bi_percentage: RoyaltyPercentage.new(50.0)
   )
